@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html in Chrome",
-            "file": "${workspaceFolder}/schommelschip-simulatie/schommelschip.html",
+            "file": "${workspaceFolder}/mainPage.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
