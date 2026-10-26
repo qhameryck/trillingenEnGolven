@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Massa-veersysteem</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Massa-veersysteem</h1>
+    <p class="sub">Kijk hoe de beweging van de massa de grafiek tekent. Verander de amplitude en de periode, en zie wat er gebeurt.</p>
+  </header>
+
+  <div class="formula" aria-live="polite">y(t) = <b id="fA">5,0</b> cm · sin(2π · t / <b id="fT">2,0</b> s) &nbsp;&nbsp; f = 1/T = <b id="fF">0,50</b> Hz</div>
+
+  <div class="stage"><canvas id="cv" aria-label="Animatie van een massa aan een veer met de bijhorende uitwijking-tijdgrafiek"></canvas></div>
+
+  <div class="controls">
+    <div class="ctl">
+      <label for="sA">Amplitude A <output id="oA">5,0 cm</output></label>
+      <input id="sA" type="range" min="1" max="10" step="0.5" value="5">
+      <small>Hoe ver de massa maximaal van de evenwichtslijn gaat.</small>
+    </div>
+    <div class="ctl">
+      <label for="sT">Periode T <output id="oT">2,0 s</output></label>
+      <input id="sT" type="range" min="0.5" max="4" step="0.1" value="2">
+      <small>Hoe lang één volledige trilling (heen en terug) duurt.</small>
+    </div>
+    <div class="ctl">
+      <div class="buttons">
+        <button id="play" class="primary" type="button">Pauze</button>
+        <button id="clear" type="button">Wis grafiek</button>
+        <select id="speed" aria-label="Snelheid">
+          <option value="1">Snelheid 1×</option>
+          <option value="0.5">Snelheid ½×</option>
+          <option value="0.25">Snelheid ¼×</option>
+        </select>
+      </div>
+      <label class="check" for="help"><input id="help" type="checkbox" checked> Toon A en T op de grafiek</label>
+      <div class="readout"><span>t = <b id="rt">0,00</b> s</span><span>y = <b id="ry">0,0</b> cm</span></div>
+    </div>
+  </div>
+
+  <section class="tasks">
+    <h2>Opdrachten</h2>
+    <ol>
+      <li>Duid op de grafiek de evenwichtslijn aan. Waar staat de massa dan?</li>
+      <li>Zet A op 8 cm. Wat verandert er aan de beweging en aan de grafiek? Wat blijft gelijk?</li>
+      <li>Zet T op 1 s. Hoeveel trillingen zie je nu per seconde? Controleer met f = 1/T.</li>
+      <li>Pauzeer en lees A en T af op de grafiek. Klopt dat met de schuifjes?</li>
+    </ol>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
