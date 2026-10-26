@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html in Chrome",
-            "file": "${workspaceFolder}/massaVeerSysteem/massaVeerSysteem.html",
+            "file": "${workspaceFolder}/schommelschip-simulatie/schommelschip.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

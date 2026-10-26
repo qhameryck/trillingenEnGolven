@@ -1,0 +1,264 @@
+/* =========================================================
+   Schommelschip – opmaak
+   Layout: links het schommelschip, rechts de grafiek
+   die meeloopt; bedieningspaneel eronder.
+   ========================================================= */
+ 
+ 
+/* ---------- 1. Basis-reset ---------- */
+ 
+/* Breedte van een element = inhoud + padding + rand (rekent makkelijker) */
+* {
+  box-sizing: border-box;
+}
+ 
+/* Standaardmarge van de browser rond de pagina weghalen */
+body {
+  margin: 0;
+}
+ 
+ 
+/* ---------- 2. Variabelen (kleuren en lettertypes) ---------- */
+/* ':root' is het root-element binnen de HTML-structuur en hierbinnen maken we dus variabelen aan die overal
+  in het css-document gebruikt kunnen worden. */
+ 
+:root {
+  /* algemene kleuren */
+  --bg: #f3f5f7;        /* achtergrond pagina */
+  --panel: #ffffff;     /* achtergrond van de vakken */
+  --fg: #14202b;        /* gewone tekst */
+  --muted: #5b6b78;     /* minder belangrijke tekst */
+  --line: #d5dde3;      /* randen */
+ 
+  /* kleuren in de simulatie */
+  --frame: #3d5566;     /* stellage en arm */
+  --ship: #e0662b;      /* schip + hoofdknop */
+  --person: #14202b;    /* passagiers */
+  --trace: #1f6fd1;     /* grafieklijn */
+  --eq: #7a8a96;        /* evenwichtsstand */
+  --help: #1a9c6b;      /* hulplijnen θmax en T */
+  --grid: #e6ebef;      /* rooster van de grafiek */
+ 
+  /* lettertypes (met reserve als Google Fonts niet laadt) */
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+ 
+ 
+/* ---------- 3. Pagina ---------- */
+ 
+/* var(--bg) is de variabele die in ':root' gedefinieerd is */
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+ 
+/* Hoofdcontainer: gecentreerd, max. 1040px breed, blokken onder elkaar */
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-block: 20px 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 16px;
+}
+ 
+ 
+/* ---------- 4. Titel en ondertitel ---------- */
+ 
+h1 {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);  /* schaalt mee met schermbreedte */
+  margin: 0;
+  text-wrap: balance;
+  letter-spacing: -0.01em;
+}
+ 
+.sub {
+  color: var(--muted);
+  margin: 2px 0 0;
+}
+ 
+ 
+/* ---------- 5. Formulebalk ---------- */
+ 
+.formula {
+  font-family: var(--mono);
+  font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  overflow-x: auto;      /* op smalle schermen horizontaal scrollen */
+  white-space: nowrap;   /* formule niet afbreken */
+}
+ 
+/* De getallen in de formule (θmax, T, L) */
+.formula b {
+  color: var(--trace);
+  font-weight: 500;
+}
+ 
+ 
+/* ---------- 6. Simulatievlak (canvas) ---------- */
+ 
+.stage {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+ 
+canvas {
+  display: block;
+  width: 100%;
+  height: 380px;
+}
+ 
+ 
+/* ---------- 7. Bedieningspaneel ---------- */
+ 
+/* Kolommen die zich automatisch aanpassen aan de breedte (min. 220px) */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+ 
+/* Eén blok: label + schuifje + uitleg */
+.ctl {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+ 
+/* Label links, waarde rechts */
+.ctl label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 700;
+}
+ 
+/* De waarde naast het label (bv. "5,0 cm") */
+.ctl output {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--trace);
+}
+ 
+/* Uitlegtekst onder een schuifje */
+.ctl small {
+  color: var(--muted);
+}
+ 
+ 
+/* ---------- 8. Schuifjes ---------- */
+ 
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--ship);
+}
+ 
+ 
+/* ---------- 9. Knoppen en keuzelijst ---------- */
+ 
+/* Rij knoppen naast elkaar, springt naar volgende regel als het niet past */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+ 
+button, select {
+  font: inherit;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+ 
+/* Hoofdknop (Pauze/Start) */
+button.primary {
+  background: var(--ship);
+  border-color: var(--ship);
+  color: #fff;
+}
+ 
+/* Zichtbare rand bij bedienen met het toetsenbord (Tab) */
+button:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 3px solid var(--trace);
+  outline-offset: 2px;
+}
+ 
+ 
+/* ---------- 10. Vinkje en meetwaarden ---------- */
+ 
+/* "Toon θmax en T" */
+.check {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-weight: 700;
+}
+ 
+/* t = ... s   θ = ... ° */
+.readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+ 
+.readout span b {
+  color: var(--fg);
+  font-weight: 500;
+}
+ 
+/* ---------- 11. Opdrachten ---------- */
+ 
+.tasks {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+ 
+.tasks h2 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  margin: 0 0 6px;
+}
+ 
+.tasks ol {
+  margin: 0;
+  padding-left: 1.3em;
+  display: grid;
+  gap: 4px;
+  max-width: 70ch;   /* regels niet te lang om te lezen */
+}
+ 
+ 
+/* ---------- 12. Smalle schermen (gsm) ---------- */
+ 
+@media (max-width: 560px) {
+  canvas {
+    height: 320px;
+  }
+}
+ 
