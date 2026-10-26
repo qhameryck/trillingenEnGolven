@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 3 · Amplitude</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="3" data-steps="6">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../trillingen.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 3 van 6</p>
+    <h1>Amplitude</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>Op een festival zet de dj de muziek luider. De conus van de luidspreker beweegt nog altijd even snel heen en weer, maar slaat <b>verder</b> uit. Op de schommel gebeurt hetzelfde als iemand je harder duwt: je gaat hoger, maar één keer heen en terug duurt even lang.</p>
+    <p class="predict">Voorspel: wat verandert er aan de grafiek als de beweging "groter" wordt?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="amplitude" data-t="2" aria-label="Massa aan een veer met de amplitude aangeduid op de grafiek"></canvas></div>
+    <div class="ctl">
+      <label for="sA">Amplitude A <output id="oA">5,0 cm</output></label>
+      <input id="sA" type="range" min="1" max="10" step="0.5" value="5">
+    </div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+    </div>
+  </section>
+
+  <!-- 3. Definition -->
+  <section class="block definition">
+    <h2>Wat is de amplitude?</h2>
+    <p>De <b>amplitude A</b> is de <b>grootste uitwijking</b>: hoe ver het voorwerp maximaal van de evenwichtsstand gaat.</p>
+    <p>Symbool: <b>A</b> · eenheid: <b>m</b> (of cm)</p>
+    <p class="warning">Let op: je meet de amplitude <b>vanaf de evenwichtsstand</b>, niet van uiterst links tot uiterst rechts (of van dal tot top). Dat is 2·A.</p>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">1. Het schommelschip zwaait 3 m naar links en 3 m naar rechts van de evenwichtsstand. Hoe groot is de amplitude?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. 1,5 m is de helft van de amplitude.">1,5 m</button>
+        <button type="button" data-value="b" data-feedback="Juist! Je meet vanaf de evenwichtsstand tot het verste punt: 3 m.">3 m</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. 6 m is de afstand van uiterst links tot uiterst rechts. De amplitude meet je vanaf de evenwichtsstand.">6 m</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="number" data-answer="4" data-tolerance="0.3"
+         data-mistake="8" data-mistake-feedback="Je meet van dal tot top. Dat is 2·A. Meet vanaf de evenwichtslijn (y = 0).">
+      <p class="q">2. Lees de amplitude af op de grafiek.</p>
+      <canvas class="graph" data-a="4" data-t="2"></canvas>
+      <div class="answer">
+        <label>A = <input type="text" inputmode="decimal" aria-label="Amplitude in cm"> cm</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="click" data-target="extreme">
+      <p class="q">3. Klik op de grafiek op een moment waarop de uitwijking even groot is als de amplitude.</p>
+      <canvas class="graph clickable" data-a="6" data-t="3"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="a">
+      <p class="q">4. De muziek gaat luider en de conus slaat verder uit. Wat verandert er aan de grafiek?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Juist! De toppen worden hoger en de dalen dieper. De tijd voor één trilling blijft gelijk.">Enkel A wordt groter</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. Luider betekent een grotere uitwijking, niet trager trillen. Probeer het met de slider hierboven: verandert de afstand tussen de toppen?">Enkel T wordt groter</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Kijk naar de simulatie: als je A verandert, blijft de afstand tussen twee toppen gelijk.">A en T worden allebei groter</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap2-uitwijking.html">← Vorige: uitwijking</a>
+    <a class="btn primary" href="stap4-periode.html">Volgende: periode →</a>
+  </nav>
+
+</div>
+</body>
+</html>

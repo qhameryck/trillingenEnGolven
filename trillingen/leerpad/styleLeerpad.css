@@ -1,0 +1,324 @@
+/* =========================================================
+   Leerpad – opmaak
+   Eén stylesheet voor alle stappen van het leerpad.
+   Elke pagina: voorbeeld -> simulatie -> definitie -> oefeningen.
+   ========================================================= */
+
+
+/* ---------- 1. Basis-reset ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+
+/* ---------- 2. Variabelen (kleuren en lettertypes) ---------- */
+
+:root {
+  /* algemene kleuren */
+  --bg: #f3f5f7;        /* achtergrond pagina */
+  --panel: #ffffff;     /* achtergrond van de vakken */
+  --fg: #14202b;        /* gewone tekst */
+  --muted: #5b6b78;     /* minder belangrijke tekst */
+  --line: #d5dde3;      /* randen */
+
+  /* kleuren in de simulatie */
+  --spring: #3d5566;    /* veer */
+  --mass: #e0662b;      /* massa + hoofdknop */
+  --trace: #1f6fd1;     /* grafieklijn */
+  --eq: #7a8a96;        /* evenwichtslijn */
+  --help: #1a9c6b;      /* het begrip dat oplicht */
+  --grid: #e6ebef;      /* rooster van de grafiek */
+
+  /* feedback */
+  --ok: #1a7f52;        /* juist */
+  --ok-bg: #e5f5ec;
+  --bad: #b3261e;       /* fout */
+  --bad-bg: #fbe9e7;
+
+  /* lettertypes */
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+
+/* ---------- 3. Pagina ---------- */
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+/* Smaller dan de simulaties: tekst leest beter in een smalle kolom */
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  display: grid;
+  gap: 16px;
+}
+
+
+/* ---------- 4. Navigatie en voortgang ---------- */
+
+.back {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.back:hover {
+  color: var(--fg);
+}
+
+/* Grijze balk met daarin een gekleurde balk (breedte gezet door het script) */
+.progress {
+  height: 8px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--mass);
+}
+
+/* Vorige / volgende onderaan */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+
+/* ---------- 5. Titels ---------- */
+
+.step-label {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+h1 {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  margin: 0 0 8px;
+}
+
+
+/* ---------- 6. Blokken ---------- */
+
+.block {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.block p {
+  margin: 0;
+}
+
+/* Voorspelvraag */
+.predict {
+  font-weight: 700;
+  border-left: 4px solid var(--mass);
+  padding-left: 10px;
+}
+
+/* Definitie: groene rand links */
+.definition {
+  border-left: 5px solid var(--help);
+}
+
+/* Waarschuwing voor een misconceptie */
+.warning {
+  background: #fff6e8;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+
+/* ---------- 7. Simulatie (canvas) ---------- */
+
+.stage {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+canvas.mini {
+  display: block;
+  width: 100%;
+  height: 300px;
+}
+
+/* Statische grafiek bij een oefening */
+canvas.graph {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+canvas.clickable {
+  cursor: crosshair;
+}
+
+
+/* ---------- 8. Schuifjes ---------- */
+
+.ctl {
+  display: grid;
+  gap: 4px;
+}
+
+.ctl label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.ctl output {
+  font-family: var(--mono);
+  color: var(--trace);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--mass);
+}
+
+
+/* ---------- 9. Knoppen ---------- */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* .btn = link die eruitziet als een knop */
+button, .btn {
+  font: inherit;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button.primary, .btn.primary {
+  background: var(--mass);
+  border-color: var(--mass);
+  color: #fff;
+}
+
+button:focus-visible, .btn:focus-visible, input:focus-visible {
+  outline: 3px solid var(--trace);
+  outline-offset: 2px;
+}
+
+
+/* ---------- 10. Oefeningen ---------- */
+
+.question {
+  display: grid;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.question .q {
+  font-weight: 700;
+}
+
+/* Antwoordknoppen van een meerkeuzevraag */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Gekozen antwoord: juist (groen) of fout (rood) */
+.options button.right {
+  background: var(--ok-bg);
+  border-color: var(--ok);
+}
+
+.options button.wrong {
+  background: var(--bad-bg);
+  border-color: var(--bad);
+}
+
+/* Invulvraag */
+.answer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.answer input {
+  font: inherit;
+  width: 6em;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+/* Feedbacktekst onder de vraag (leeg tot er geantwoord is) */
+.feedback {
+  border-radius: 8px;
+}
+
+.feedback.ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+  padding: 8px 12px;
+}
+
+.feedback.bad {
+  background: var(--bad-bg);
+  color: var(--bad);
+  padding: 8px 12px;
+}
+
+/* Verschijnt als alle vragen juist zijn */
+.done {
+  font-weight: 700;
+  color: var(--ok);
+  font-size: 1.1rem;
+}
+
+
+/* ---------- 11. Smalle schermen (gsm) ---------- */
+
+@media (max-width: 560px) {
+  canvas.mini {
+    height: 260px;
+  }
+}
