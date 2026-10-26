@@ -197,7 +197,7 @@ function arrow(x1,y1,x2,y2){
   ctx.moveTo(x1,y1); 
   ctx.lineTo(x2,y2); 
   ctx.stroke();
-  
+
   const a = Math.atan2(y2-y1, x2-x1), h = 7;
   ctx.beginPath(); ctx.moveTo(x2,y2);
   ctx.lineTo(x2 - h*Math.cos(a-0.45), y2 - h*Math.sin(a-0.45));
@@ -208,7 +208,7 @@ function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w
 let last = performance.now();
 function tick(now){
   const dt = Math.min(0.05, (now - last) / 1000) * speed; 
-  const last = now;
+  last = now;
 
   if (running){
     t += dt; phase += 2*Math.PI*dt/T;
