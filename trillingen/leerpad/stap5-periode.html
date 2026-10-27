@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 5 · Periode</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="5" data-steps="7">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../index.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 5 van 7</p>
+    <h1>Periode</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>Op de kermis duurt één keer heen en terug van het schommelschip ongeveer 7 seconden. Je hart klopt in rust ongeveer één keer per seconde. Een gitaarsnaar gaat honderden keren per seconde heen en weer.</p>
+    <p class="predict">Voorspel: waar zie je op de grafiek hoe lang één keer heen en terug duurt?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="periode" data-a="5" data-t="2" aria-label="Massa aan een veer met de periode aangeduid tussen twee toppen"></canvas></div>
+    <div class="ctl">
+      <label for="sT">Periode T <output id="oT">2,0 s</output></label>
+      <input id="sT" type="range" min="0.5" max="4" step="0.1" value="2">
+    </div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+    </div>
+  </section>
+
+  <!-- 3. Definition T -->
+  <section class="block definition">
+    <h2>Wat is de periode?</h2>
+    <p>De <b>periode T</b> is de tijd voor <b>één volledige trilling</b>: heen én terug, tot het voorwerp weer op dezelfde plaats is en in dezelfde richting beweegt.</p>
+    <p>Op de grafiek is dat de tijd tussen <b>twee toppen</b> (of twee dalen) die elkaar volgen.</p>
+    <p>Symbool: <b>T</b> · eenheid: <b>s</b></p>
+    <p class="warning">Let op: van een top tot het volgende dal is maar een <b>halve</b> trilling (T/2).</p>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="number" data-answer="3" data-tolerance="0.2"
+         data-mistake="1.5" data-mistake-feedback="Dat is maar een halve trilling (van top tot dal, of tussen twee snijpunten met de evenwichtslijn). Meet van top tot top.">
+      <p class="q">1. Lees de periode af op de grafiek.</p>
+      <canvas class="graph" data-a="5" data-t="3"></canvas>
+      <div class="answer">
+        <label>T = <input type="text" inputmode="decimal" aria-label="T"> s</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="c">
+      <p class="q">2. Van een top tot het volgende dal duurt 0,8 s. Hoe groot is T?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Van top tot dal is een halve trilling, dus T is groter, niet kleiner.">0,4 s</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. Van top tot dal is maar een halve trilling.">0,8 s</button>
+        <button type="button" data-value="c" data-feedback="Juist! Top tot dal is T/2, dus T = 2 · 0,8 s = 1,6 s.">1,6 s</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="c">
+      <p class="q">3. Je trekt de massa verder naar beneden voor je ze loslaat (grotere amplitude). Wat gebeurt er met T?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Bij een harmonische trilling hangt T niet af van de amplitude.">T wordt groter</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. Bij een harmonische trilling hangt T niet af van de amplitude.">T wordt kleiner</button>
+        <button type="button" data-value="c" data-feedback="Juist! De massa gaat verder, maar ook sneller, en doet er even lang over.">T blijft gelijk</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap4-amplitude.html">← Vorige: amplitude</a>
+    <a class="btn primary" href="stap6-frequentie.html">Volgende: frequentie →</a>
+  </nav>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 7 · Eindcheck</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="7" data-steps="7">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../index.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 7 van 7</p>
+    <h1>Eindcheck</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Alles samen</h2>
+    <p>In de les hing je een gsm aan een veer en mat je de beweging met phyphox. Stel dat je deze grafiek krijgt. Gebruik alles wat je geleerd hebt.</p>
+  </section>
+
+  <!-- Overview of the steps -->
+  <section class="block">
+    <h2>Jouw voortgang</h2>
+    <ul class="overview">
+      <li data-step="1">Stap 1: Wat is een trilling?</li>
+      <li data-step="2">Stap 2: Uitwijking</li>
+      <li data-step="3">Stap 3: Evenwichtsstand</li>
+      <li data-step="4">Stap 4: Amplitude</li>
+      <li data-step="5">Stap 5: Periode</li>
+      <li data-step="6">Stap 6: Frequentie</li>
+    </ul>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="click" data-target="zero">
+      <p class="q">1. Klik op een moment waarop de gsm door de evenwichtsstand gaat.</p>
+      <canvas class="graph clickable" data-a="7" data-t="2.5"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="number" data-answer="7" data-tolerance="0.3"
+         data-mistake="14" data-mistake-feedback="Je meet van dal tot top. Dat is 2·A. Meet vanaf de evenwichtslijn.">
+      <p class="q">2. Lees de amplitude af.</p>
+      <div class="answer">
+        <label>A = <input type="text" inputmode="decimal" aria-label="A"> cm</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="number" data-answer="2.5" data-tolerance="0.2"
+         data-mistake="1.25" data-mistake-feedback="Dat is maar een halve trilling. Meet van top tot top, of tussen het 1ste en 3de snijpunt met de evenwichtslijn.">
+      <p class="q">3. Lees de periode af.</p>
+      <div class="answer">
+        <label>T = <input type="text" inputmode="decimal" aria-label="T"> s</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="number" data-answer="0.4" data-tolerance="0.04"
+         data-mistake="2.5" data-mistake-feedback="2,5 s is de periode. De frequentie is f = 1 / T.">
+      <p class="q">4. Bereken de frequentie.</p>
+      <div class="answer">
+        <label>f = <input type="text" inputmode="decimal" aria-label="f"> Hz</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="click" data-target="min">
+      <p class="q">5. Klik op een moment waarop de uitwijking −A is.</p>
+      <canvas class="graph clickable" data-a="7" data-t="2.5"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap7-hoekfrequentie.html">← Vorige: hoekfrequentie</a>
+    <a class="btn primary" href="../index.html">Klaar: terug naar Trillingen →</a>
+  </nav>
+
+</div>
+</body>
+</html>

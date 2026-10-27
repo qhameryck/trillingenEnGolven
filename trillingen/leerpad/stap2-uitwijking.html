@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 2 · Uitwijking</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="2" data-steps="7">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../index.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 2 van 7</p>
+    <h1>Uitwijking</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>De gsm aan de veer gaat op en neer. Op elk moment zit hij ergens: <b>boven</b> of <b>onder</b> de plaats waar hij in rust hing, of er net voorbij.</p>
+    <p class="predict">Voorspel: hoe kan je met één getal zeggen waar de gsm op een bepaald moment is?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="uitwijking" data-a="5" data-t="2" aria-label="Massa aan een veer met de uitwijking als pijl"></canvas></div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+      <span class="readout">y = <b id="ry">0,0</b> cm</span>
+    </div>
+  </section>
+
+  <!-- 3. Definition -->
+  <section class="block definition">
+    <h2>Wat is de uitwijking?</h2>
+    <p>De <b>uitwijking y</b> is de afstand van het voorwerp tot de evenwichtsstand <b>op één bepaald moment</b>.</p>
+    <p>Boven de evenwichtsstand is y <b>positief</b>, eronder <b>negatief</b>. Omdat het voorwerp beweegt, verandert y voortdurend: daarom schrijven we y(t).</p>
+    <p>Symbool: <b>y</b> · eenheid: <b>m</b> (of cm)</p>
+    <p class="warning">Let op: de uitwijking is geen afgelegde weg. Na één volledige trilling is de uitwijking weer dezelfde als bij de start, ook al heeft het voorwerp een hele afstand afgelegd.</p>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">1. De massa hangt 3 cm <b>onder</b> de evenwichtsstand. Wat is de uitwijking?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Onder de evenwichtsstand is de uitwijking negatief.">+3 cm</button>
+        <button type="button" data-value="b" data-feedback="Juist! 3 cm van de evenwichtsstand, en eronder, dus negatief.">−3 cm</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. De uitwijking is 0 enkel in de evenwichtsstand zelf.">0 cm</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="number" data-answer="-5" data-tolerance="0.3"
+         data-mistake="5" data-mistake-feedback="Let op het teken: de grafiek ligt daar onder de evenwichtslijn, dus de uitwijking is negatief.">
+      <p class="q">2. Lees de uitwijking af op t = 3 s.</p>
+      <canvas class="graph" data-a="5" data-t="4"></canvas>
+      <div class="answer">
+        <label>y = <input type="text" inputmode="decimal" aria-label="y"> cm</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="click" data-target="negative">
+      <p class="q">3. Klik op een moment waarop de uitwijking negatief is.</p>
+      <canvas class="graph clickable" data-a="6" data-t="3"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="a">
+      <p class="q">4. De gsm start in de evenwichtsstand. Wat is de uitwijking na precies één volledige trilling?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Juist! Na één volledige trilling is het voorwerp terug waar het begon.">0 cm, weer in de evenwichtsstand</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. Dat is de afgelegde weg van top tot dal, niet de uitwijking.">Twee keer de amplitude</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Dat is de totale afgelegde weg tijdens één trilling. De uitwijking is de afstand tot de evenwichtsstand.">Vier keer de amplitude</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap1-trilling.html">← Vorige: wat is een trilling</a>
+    <a class="btn primary" href="stap3-evenwicht.html">Volgende: evenwichtsstand →</a>
+  </nav>
+
+</div>
+</body>
+</html>

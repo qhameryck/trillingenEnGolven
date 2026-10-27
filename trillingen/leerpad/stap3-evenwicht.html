@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 3 · Evenwichtsstand</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="3" data-steps="7">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../index.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 3 van 7</p>
+    <h1>Evenwichtsstand</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>Als je een schommel loslaat en niemand duwt nog, komt hij na een tijd tot rust. Een gsm aan een veer komt uiteindelijk ook stil te hangen.</p>
+    <p class="predict">Voorspel: waar komt het voorwerp tot rust? Bovenaan, onderaan of ergens in het midden?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="evenwicht" data-a="5" data-t="2" aria-label="Massa aan een veer met de evenwichtsstand aangeduid"></canvas></div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+    </div>
+  </section>
+
+  <!-- 3. Definition -->
+  <section class="block definition">
+    <h2>Wat is de evenwichtsstand?</h2>
+    <p>De <b>evenwichtsstand</b> is de plaats waar het voorwerp <b>in rust</b> blijft hangen. Daar is de terugroepende kracht 0 en de <b>uitwijking 0</b>.</p>
+    <p>Op de grafiek is dat de <b>evenwichtslijn</b>: de horizontale lijn y = 0. De trilling gebeurt rond die lijn, evenveel erboven als eronder.</p>
+    <p class="warning">Let op: de evenwichtsstand is niet het laagste punt van de beweging. Het voorwerp gaat er evenver boven als onder.</p>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">1. Een massa gaat op en neer tussen 20 cm en 30 cm boven de grond. Waar ligt de evenwichtsstand?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Dat is het laagste punt. De evenwichtsstand ligt in het midden van de beweging.">20 cm</button>
+        <button type="button" data-value="b" data-feedback="Juist! De massa gaat evenver boven als onder de evenwichtsstand: 5 cm.">25 cm</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Dat is het hoogste punt. De evenwichtsstand ligt in het midden van de beweging.">30 cm</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="click" data-target="zero">
+      <p class="q">2. Klik op een moment waarop het voorwerp door de evenwichtsstand gaat.</p>
+      <canvas class="graph clickable" data-a="6" data-t="3"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">3. Hoe vaak gaat het voorwerp door de evenwichtsstand tijdens één volledige trilling?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Het gaat erdoor op weg naar beneden én op weg naar boven.">1 keer</button>
+        <button type="button" data-value="b" data-feedback="Juist! Eén keer naar beneden en één keer naar boven. Op de grafiek: twee snijpunten met de evenwichtslijn per trilling.">2 keer</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Tel op de grafiek de snijpunten met de evenwichtslijn tussen twee toppen.">4 keer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="a">
+      <p class="q">4. Wat is de uitwijking in de evenwichtsstand?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Juist! De uitwijking meet je vanaf de evenwichtsstand, dus daar is ze 0.">0</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. Bij de amplitude is het voorwerp het verst van de evenwichtsstand.">Gelijk aan de amplitude</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Voor elke trilling is de uitwijking 0 in de evenwichtsstand, want je meet vanaf daar.">Dat hangt af van de veer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap2-uitwijking.html">← Vorige: uitwijking</a>
+    <a class="btn primary" href="stap4-amplitude.html">Volgende: amplitude →</a>
+  </nav>
+
+</div>
+</body>
+</html>

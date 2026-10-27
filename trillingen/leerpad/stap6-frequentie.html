@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 6 · Frequentie</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="6" data-steps="7">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../index.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 6 van 7</p>
+    <h1>Frequentie</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>Op een festival speelt een nummer van <b>120 BPM</b>: 120 beats per minuut. Je hart klopt in rust zo'n 60 keer per minuut.</p>
+    <p class="predict">Voorspel: hoeveel beats is 120 BPM per seconde?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="frequentie" data-a="5" data-t="2" aria-label="Massa aan een veer met het aantal trillingen in één seconde aangeduid"></canvas></div>
+    <div class="ctl">
+      <label for="sT">Periode T <output id="oT">2,0 s</output></label>
+      <input id="sT" type="range" min="0.5" max="4" step="0.1" value="2">
+    </div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+    </div>
+  </section>
+
+  <!-- 3. Definition -->
+  <section class="block definition">
+    <h2>Wat is de frequentie?</h2>
+    <p>De <b>frequentie f</b> is het <b>aantal trillingen per seconde</b>.</p>
+    <p>De <b>frequentie f </b> is dus <b>de inverse van de periode T</b>.</p>
+    <p>Je berekent ze uit de periode: <b>f = 1 / T</b>. Hoe korter de periode, hoe groter de frequentie.</p>
+    <p>Symbool: <b>f</b> · eenheid: <b>hertz (Hz)</b>, waarbij 1 Hz = 1 trilling per seconde</p>
+    <ul class="examples">
+      <li>Je hartslag in rust: ongeveer 1 Hz</li>
+      <li>Een nummer van 120 BPM: 2 Hz</li>
+      <li>Een lage bastoon: ongeveer 50 Hz</li>
+      <li>De hoogste toon die jongeren horen: ongeveer 18 000 Hz</li>
+    </ul>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="number" data-answer="2" data-tolerance="0.05"
+         data-mistake="0.5" data-mistake-feedback="Je gaf T terug. De frequentie is f = 1 / T = 1 / 0,5 s.">
+      <p class="q">1. Een trilling heeft een periode T = 0,5 s. Bereken de frequentie.</p>
+      <div class="answer">
+        <label>f = <input type="text" inputmode="decimal" aria-label="f"> Hz</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="number" data-answer="0.5" data-tolerance="0.05"
+         data-mistake="2" data-mistake-feedback="2 s is de periode T. De frequentie is f = 1 / T.">
+      <p class="q">2. Bepaal de frequentie van deze trilling. Lees eerst T af.</p>
+      <canvas class="graph" data-a="4" data-t="2"></canvas>
+      <div class="answer">
+        <label>f = <input type="text" inputmode="decimal" aria-label="f"> Hz</label>
+        <button type="button" class="check">Controleer</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">3. Een nummer heeft 120 BPM (beats per minuut). Wat is de frequentie van de beat?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. 120 per minuut is meer dan 1 per seconde.">0,5 Hz</button>
+        <button type="button" data-value="b" data-feedback="Juist! 120 beats / 60 s = 2 beats per seconde = 2 Hz.">2 Hz</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. 120 is per minuut, hertz is per seconde. Deel door 60.">120 Hz</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">4. De periode wordt twee keer zo groot. Wat gebeurt er met de frequentie?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Een langere periode betekent minder trillingen per seconde.">Twee keer zo groot</button>
+        <button type="button" data-value="b" data-feedback="Juist! f = 1 / T: verdubbel je T, dan halveert f.">Twee keer zo klein</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. f = 1 / T, dus als T verandert, verandert f ook.">Blijft gelijk</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap5-periode.html">← Vorige: periode</a>
+    <a class="btn primary" href="stap7-hoekfrequentie.html">Volgende: hoekfrequentie →</a>
+  </nav>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 1 · Wat is een trilling?</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="1" data-steps="7">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../trillingen.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 1 van 7</p>
+    <h1>Wat is een trilling?</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>Trek een gsm aan een veer naar beneden en laat los. Duw een schommel weg. Tokkel aan een gitaarsnaar. Telkens gebeurt hetzelfde: het voorwerp gaat heen en weer, steeds opnieuw, rond de plaats waar het eerst stil hing.</p>
+    <p class="predict">Voorspel: waarom komt het voorwerp telkens terug, en waarom stopt het niet gewoon in het midden?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="kracht" data-a="5" data-t="2" aria-label="Massa aan een veer met de terugroepende kracht als pijl"></canvas></div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+    </div>
+  </section>
+
+  <!-- 3. Definition -->
+  <section class="block definition">
+    <h2>Wat is een trilling?</h2>
+    <p>Een <b>trilling</b> is een beweging die zich <b>herhaalt</b>: het voorwerp gaat heen en weer rond een <b>evenwichtsstand</b>, de plaats waar het in rust zou blijven.</p>
+    <p>Hoe komt dat? Zodra je het voorwerp uit zijn evenwichtsstand haalt, werkt er een <b>terugroepende kracht</b> die het <b>terug naar de evenwichtsstand</b> trekt (de rode pijl). Hoe verder weg, hoe groter die kracht.</p>
+    <p>Die heen-en-weerbeweging kan je beschrijven met een formule: <b>y(t) = A · sin(2π · t / T)</b></p>
+    <ul class="examples">
+      <li><b>y(t)</b>: waar het voorwerp is op tijdstip t</li>
+      <li><b>t</b>: het tijdstip waarop de positie wordt bepaald</li>
+      <li><b>T</b>: de periode van de trilling (tijd voor één volledige trilling)</li>
+      <li><b>2π</b>: staat voor één volledige trilling, zoals één volle toer (360°)</li>
+      <li><b>A</b>,<b>T</b>, <b>2π*t</b>: wat die betekenen, ontdek je in de volgende stappen</li>
+    </ul>
+    <p>In de evenwichtsstand is de kracht 0, maar het voorwerp heeft daar zijn grootste snelheid. Door zijn <b>traagheid</b> schiet het erdoor, en aan de andere kant trekt de kracht het weer terug. Zo blijft het heen en weer gaan.</p>
+    <p class="warning">Elk voorwerp met een terugroepende kracht naar een evenwichtsstand kan trillen: een veer, een schommel, een snaar, je trommelvlies, de vering van een auto.</p>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">1. Welke beweging is een trilling?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. De bal rolt weg en komt niet terug: er is geen terugroepende kracht naar een evenwichtsstand.">Een bal die van een helling rolt</button>
+        <button type="button" data-value="b" data-feedback="Juist! De snaar wordt telkens teruggetrokken naar haar rustpositie en gaat heen en weer.">Een gitaarsnaar na het tokkelen</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. De auto beweegt in één richting en de beweging herhaalt zich niet.">Een auto die met constante snelheid rijdt</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">2. Je trekt de massa naar beneden en laat los. In welke richting trekt de veer?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. De veer is uitgerekt en trekt de massa terug naar de evenwichtsstand, dus omhoog.">Naar beneden</button>
+        <button type="button" data-value="b" data-feedback="Juist! De terugroepende kracht wijst altijd naar de evenwichtsstand.">Omhoog, naar de evenwichtsstand</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Zodra de massa uit de evenwichtsstand is, werkt er een terugroepende kracht.">In geen enkele richting</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="a">
+      <p class="q">3. In de evenwichtsstand is de terugroepende kracht 0. Waarom blijft de massa daar dan niet staan?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Juist! De kracht is 0, maar de massa beweegt nog. Ze schiet door tot de kracht haar aan de andere kant afremt.">Ze heeft daar haar grootste snelheid en schiet door (traagheid)</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. In de evenwichtsstand is de kracht net 0. Kijk naar de groene pijl in de simulatie.">Omdat de veer daar het hardst trekt</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Het is de snelheid van de massa (traagheid) die haar doet doorschieten.">Omdat de zwaartekracht haar wegduwt</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="click" data-target="forceMax">
+      <p class="q">4. Klik op een moment waarop de terugroepende kracht het grootst is.</p>
+      <canvas class="graph clickable" data-a="6" data-t="3"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="../index.html">← Terug naar Trillingen</a>
+    <a class="btn primary" href="stap2-uitwijking.html">Volgende: uitwijking →</a>
+  </nav>
+
+</div>
+</body>
+</html>

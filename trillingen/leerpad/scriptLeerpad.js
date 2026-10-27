@@ -137,8 +137,16 @@ function startMini(canvas){
     const g = drawAxes(ctx, c, gx0, gx1, top, bottom, tStart);
     const tx = g.tx;
 
-    // spring and mass on the left
     const cx = devW * 0.5, y = A * Math.sin(phase), my = g.toPx(y), mh = 30, mw = 42;
+    const radius = g.midY - g.toPx(A);                   // px, only used for the rotating point
+
+    if (highlight === 'cirkel') {
+      // rotating point on a circle instead of the mass-spring
+      ctx.setLineDash([6,6]); ctx.strokeStyle = c.eq; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(8, g.midY); ctx.lineTo(gx0, g.midY); ctx.stroke(); ctx.setLineDash([]);
+      drawCircle(c, g, cx, radius);
+    } else {
+    // spring and mass on the left
     ctx.fillStyle = c.line; ctx.fillRect(cx-40, top-16, 80, 8);
     const s0 = top - 8, s1 = my - mh/2, coils = 10, amp = 12;
     const seg = (s1 - s0 - 16) / (coils*2);
@@ -149,6 +157,7 @@ function startMini(canvas){
     ctx.setLineDash([6,6]); ctx.strokeStyle = c.eq; ctx.lineWidth = 1.2;
     ctx.beginPath(); ctx.moveTo(8, g.midY); ctx.lineTo(gx0, g.midY); ctx.stroke(); ctx.setLineDash([]);
     ctx.fillStyle = c.mass; ctx.fillRect(cx-mw/2, my-mh/2, mw, mh);
+    }
 
     // trace
     ctx.save(); ctx.beginPath(); ctx.rect(gx0, top-2, gx1-gx0, bottom-top+4); ctx.clip();
@@ -160,13 +169,79 @@ function startMini(canvas){
     // connection line mass -> pen
     const px = tx(t);
     ctx.setLineDash([3,4]); ctx.strokeStyle = c.mass; ctx.lineWidth = 1.2;
-    ctx.beginPath(); ctx.moveTo(cx+mw/2+4, my); ctx.lineTo(px, my); ctx.stroke(); ctx.setLineDash([]);
+    const startX = highlight === 'cirkel' ? cx + radius * Math.cos(phase) + 8 : cx + mw/2 + 4;
+    ctx.beginPath(); ctx.moveTo(startX, my); ctx.lineTo(px, my); ctx.stroke(); ctx.setLineDash([]);
     ctx.fillStyle = c.mass; ctx.beginPath(); ctx.arc(px, my, 5, 0, Math.PI*2); ctx.fill();
 
     // the concept of this step
     ctx.strokeStyle = c.help; ctx.fillStyle = c.help; ctx.lineWidth = 2; ctx.font = '700 13px ' + css('--body');
+    if (highlight === 'kracht') highlightKracht(g, cx, mw, mh, y, my);
+    if (highlight === 'uitwijking') highlightUitwijking(g, cx, mw, px, y, my);
+    if (highlight === 'evenwicht') highlightEvenwicht(g, cx, mw, mh, gx0, gx1);
     if (highlight === 'amplitude') highlightAmplitude(c, g, cx, mw, gx0, gx1);
-    // other steps: add highlightEvenwicht(), highlightUitwijking(), ... here
+    if (highlight === 'periode') highlightPeriode(g, gx0, gx1);
+    if (highlight === 'frequentie') highlightFrequentie(g, gx0, top, bottom);
+  }
+
+  // cirkel: a point turning around a circle; its height is the displacement y, its angle is 360° · t / T
+  function drawCircle(c, g, cx, radius){
+    const angle = phase % (2*Math.PI);                   // rad, between 0 and 2π
+    const degrees = Math.round(angle * 180 / Math.PI);
+    const px = cx + radius * Math.cos(angle), py = g.midY - radius * Math.sin(angle);
+
+    // circle
+    ctx.strokeStyle = c.line; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx, g.midY, radius, 0, Math.PI*2); ctx.stroke();
+
+    // angle: arc from the start position (right) to the radius, counterclockwise
+    ctx.strokeStyle = c.help; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx, g.midY, 16, 0, -angle, true); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, g.midY); ctx.lineTo(cx + radius, g.midY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, g.midY); ctx.lineTo(px, py); ctx.stroke();
+
+    // the point itself
+    ctx.fillStyle = c.mass; ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI*2); ctx.fill();
+
+    // labels: angle and part of the vibration
+    ctx.fillStyle = c.help; ctx.font = '700 13px ' + css('--body'); ctx.textAlign = 'center';
+    ctx.fillText('ω·t = ' + fmt(angle, 2) + ' rad (' + degrees + '°)', cx, g.midY - radius - 10);
+    ctx.fillText(fmt(angle / (2*Math.PI), 2).replace(/^0,00$/, '0') + ' van een trilling', cx, g.midY + radius + 22);
+    ctx.textAlign = 'left';
+  }
+
+  // kracht: the restoring force on the mass, always pointing to the equilibrium position (F = -k·y)
+  function highlightKracht(g, cx, mw, mh, y, my){
+    // equilibrium position: thick line that stops before the mass, so the arrow tip stays free
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(8, g.midY); ctx.lineTo(cx - mw/2 - 8, g.midY); ctx.stroke();
+    ctx.lineWidth = 2;
+    if (Math.abs(y) < 0.3) return;                     // in the equilibrium position the force is 0
+    const length = y / YMAX * 120;                       // px, proportional to y; canvas y points down, so +y (above) gives an arrow downwards
+    // the force acts on the mass: the arrow starts in the centre of the block
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(cx, my, 3.5, 0, Math.PI*2); ctx.fill();   // centre of the mass
+    ctx.fillStyle = css('--help'); ctx.lineWidth = 4;
+    arrow(ctx, cx, my, cx, my + length);
+    ctx.lineWidth = 2;
+    ctx.fillText('F', cx + mw/2 + 6, my + length * 0.75 + 4);
+  }
+
+  // uitwijking: arrow from the equilibrium line to the mass (left) and to the pen (graph), with the value
+  function highlightUitwijking(g, cx, mw, px, y, my){
+    if (Math.abs(y) < 0.3) return;                     // too small to draw an arrow
+    const ax = cx - mw/2 - 14;
+    arrow(ctx, ax, g.midY, ax, my);
+    ctx.textAlign = 'right'; ctx.fillText('y', ax - 5, (g.midY + my)/2 + 4);
+    arrow(ctx, px, g.midY, px, my);
+    ctx.fillText('y = ' + fmt(y,1) + ' cm', px - 8, y > 0 ? my - 8 : my + 18); ctx.textAlign = 'left';
+  }
+
+  // evenwicht: thick equilibrium line and a ghost of the mass at rest
+  function highlightEvenwicht(g, cx, mw, mh, gx0, gx1){
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(8, g.midY); ctx.lineTo(gx1, g.midY); ctx.stroke();
+    ctx.setLineDash([4,3]); ctx.lineWidth = 1.5;
+    ctx.strokeRect(cx - mw/2, g.midY - mh/2, mw, mh); ctx.setLineDash([]);
+    ctx.fillText('evenwichtsstand (y = 0)', gx0 + 8, g.midY - 8);
   }
 
   // amplitude: dashed lines at +A and -A in the graph, arrow from equilibrium to +A at the mass
@@ -182,6 +257,39 @@ function startMini(canvas){
     ctx.textAlign = 'right'; ctx.fillText('A', ax - 5, (g.midY + yTop)/2 + 4); ctx.textAlign = 'left';
   }
 
+  // periode: double arrow between the last two peaks of the trace
+  function highlightPeriode(g, gx0, gx1){
+    const peaks = findPeaks();
+    if (peaks.length < 2) return;
+    const p2 = peaks[peaks.length-1], p1 = peaks[peaks.length-2];
+    const x1 = g.tx(p1.t), x2 = g.tx(p2.t);
+    if (x1 < gx0 || x2 > gx1) return;
+    const yy = g.toPx(p1.y) - 14;
+    ctx.setLineDash([2,3]); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x1, g.toPx(p1.y)); ctx.lineTo(x1, yy-4); ctx.moveTo(x2, g.toPx(p2.y)); ctx.lineTo(x2, yy-4); ctx.stroke();
+    ctx.setLineDash([]); ctx.lineWidth = 2;
+    arrow(ctx, x1, yy, x2, yy); arrow(ctx, x2, yy, x1, yy);
+    ctx.textAlign = 'center'; ctx.fillText('T = ' + fmt(p2.t - p1.t, 1) + ' s', (x1+x2)/2, yy - 7); ctx.textAlign = 'left';
+  }
+
+  // frequentie: shaded band of the last second, with the number of vibrations per second
+  function highlightFrequentie(g, gx0, top, bottom){
+    if (t < 1) return;
+    const x1 = Math.max(gx0, g.tx(t - 1)), x2 = g.tx(t);
+    ctx.globalAlpha = 0.12; ctx.fillRect(x1, top, x2 - x1, bottom - top); ctx.globalAlpha = 1;
+    ctx.textAlign = 'center';
+    ctx.fillText('1 s', (x1+x2)/2, bottom - 8);
+    ctx.fillText('f = 1/T = ' + fmt(1/T, 2) + ' Hz', (x1+x2)/2, top + 14);
+    ctx.textAlign = 'left';
+  }
+
+  // tops in the trace: higher than both neighbours
+  function findPeaks(){
+    const peaks = [];
+    for (let i=1; i<hist.length-1; i++){ if (hist[i].y > hist[i-1].y && hist[i].y >= hist[i+1].y && hist[i].y > 0.5) peaks.push(hist[i]); }
+    return peaks;
+  }
+
   let last = performance.now();
   function tick(now){
     const dt = Math.min(0.05, (now - last) / 1000);
@@ -190,6 +298,8 @@ function startMini(canvas){
       t += dt; phase += 2*Math.PI*dt/T;
       hist.push({t, y: A * Math.sin(phase)});
       while (hist.length && hist[0].t < t - WINDOW - 1) hist.shift();
+      const ry = document.getElementById('ry');            // optional readout of the current displacement
+      if (ry) ry.textContent = fmt(A * Math.sin(phase), 1);
     }
     draw();
     requestAnimationFrame(tick);
@@ -237,6 +347,35 @@ window.addEventListener('resize', () => graphs.forEach(canvas => drawGraph(canva
 
 // Exercises with direct feedback ===============================================================================================
 
+// click targets: which moments count as a correct click, and the feedback for right and wrong
+const clickTargets = {
+  extreme: {
+    test: (y, A) => Math.abs(y) >= 0.9 * A,
+    right: y => 'Juist! Hier is de uitwijking ' + fmt(y,1) + ' cm: dat is een top (+A) of een dal (−A). In beide gevallen is het voorwerp zo ver mogelijk van de evenwichtsstand.',
+    wrong: y => 'Hier is de uitwijking maar ' + fmt(y,1) + ' cm. Zoek een moment waarop het voorwerp zo ver mogelijk van de evenwichtslijn is.'
+  },
+  zero: {
+    test: (y, A) => Math.abs(y) <= 0.1 * A,
+    right: y => 'Juist! Hier snijdt de grafiek de evenwichtslijn: de uitwijking is 0 en het voorwerp gaat door de evenwichtsstand.',
+    wrong: y => 'Hier is de uitwijking ' + fmt(y,1) + ' cm. Zoek een punt waar de grafiek de evenwichtslijn (y = 0) snijdt.'
+  },
+  negative: {
+    test: (y, A) => y < -0.1 * A,
+    right: y => 'Juist! Hier is de uitwijking ' + fmt(y,1) + ' cm: het voorwerp zit onder de evenwichtsstand.',
+    wrong: y => 'Hier is de uitwijking ' + fmt(y,1) + ' cm. Zoek een moment waarop de grafiek onder de evenwichtslijn ligt.'
+  },
+  forceMax: {
+    test: (y, A) => Math.abs(y) >= 0.9 * A,
+    right: y => 'Juist! Hier is het voorwerp het verst van de evenwichtsstand (y = ' + fmt(y,1) + ' cm). Hoe verder weg, hoe harder de kracht terugtrekt.',
+    wrong: y => 'Hier is de uitwijking maar ' + fmt(y,1) + ' cm. De kracht is het grootst waar het voorwerp het verst van de evenwichtsstand is.'
+  },
+  min: {
+    test: (y, A) => y <= -0.9 * A,
+    right: y => 'Juist! Hier is de uitwijking ' + fmt(y,1) + ' cm, dus −A: zo ver mogelijk onder de evenwichtsstand.',
+    wrong: y => 'Hier is de uitwijking ' + fmt(y,1) + ' cm. Zoek het laagste punt van de grafiek (een dal).'
+  }
+};
+
 const questions = document.querySelectorAll('.question');
 questions.forEach(q => {
   if (q.dataset.type === 'choice') setupChoice(q);
@@ -273,7 +412,7 @@ function setupNumber(q){
   function check(){
     const value = parseFloat(input.value.replace(',', '.'));
     if (isNaN(value)) { giveFeedback(q, false, 'Vul een getal in.'); return; }
-    if (Math.abs(value - answer) <= tol) { giveFeedback(q, true, 'Juist!'); return; }
+    if (Math.abs(value - answer) <= tol) { giveFeedback(q, true, q.dataset.rightFeedback || 'Juist!'); return; }
     if (q.dataset.mistake && Math.abs(value - +q.dataset.mistake) <= tol) { giveFeedback(q, false, q.dataset.mistakeFeedback); return; }
     giveFeedback(q, false, 'Niet juist. Kijk nog eens goed naar de grafiek en probeer opnieuw.');
   }
@@ -282,8 +421,9 @@ function setupNumber(q){
   input.addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
 }
 
-// click: the student clicks a moment on the graph; "extreme" = a point where |y| = A
+// click: the student clicks a moment on the graph; data-target says which moments are correct
 function setupClick(q){
+  const target = clickTargets[q.dataset.target];
   const canvas = q.querySelector('canvas.graph');
   canvas.addEventListener('click', e => {
     const layout = drawGraph(canvas);
@@ -291,12 +431,11 @@ function setupClick(q){
     const tClick = (e.clientX - r.left - layout.x0) / (layout.x1 - layout.x0) * WINDOW;
     if (tClick < 0 || tClick > WINDOW) return;
     const y = layout.A * Math.sin(2*Math.PI*tClick/layout.T);
-    const ok = Math.abs(y) >= 0.9 * layout.A;
+    const ok = target.test(y, layout.A);
 
     canvas.marker = { t: tClick, y, ok };
     drawGraph(canvas, canvas.marker);
-    if (ok) giveFeedback(q, true, 'Juist! Hier is de uitwijking ' + fmt(y,1) + ' cm: dat is een top (+A) of een dal (−A). In beide gevallen is het voorwerp zo ver mogelijk van de evenwichtsstand.');
-    else giveFeedback(q, false, 'Hier is de uitwijking maar ' + fmt(y,1) + ' cm. Zoek een moment waarop het voorwerp zo ver mogelijk van de evenwichtslijn is.');
+    giveFeedback(q, ok, ok ? target.right(y) : target.wrong(y));
   });
 }
 
@@ -306,4 +445,18 @@ function checkAllSolved(){
   if (!allSolved) return;
   document.querySelector('.done').hidden = false;
   try { localStorage.setItem('leerpad-stap-' + step, 'done'); } catch (e) { /* storage not available: no problem */ }
+}
+
+// ============================================================================================================================================
+
+
+// Overview of the finished steps (only on the last step) =========================================================================
+
+const overview = document.querySelector('.overview');
+if (overview) {
+  overview.querySelectorAll('li').forEach(li => {
+    let done = false;
+    try { done = localStorage.getItem('leerpad-stap-' + li.dataset.step) === 'done'; } catch (e) { /* storage not available */ }
+    li.classList.add(done ? 'is-done' : 'not-done');
+  });
 }

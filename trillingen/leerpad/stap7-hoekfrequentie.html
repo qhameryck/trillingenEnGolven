@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stap 7 · De hoekfrequentie ω </title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLeerpad.css">
+  <script src="scriptLeerpad.js" defer></script>
+</head>
+<body data-step="7" data-steps="8">
+<div class="wrap">
+
+  <!-- Navigation and progress -->
+  <a class="back" href="../index.html">← Terug naar Trillingen</a>
+  <div class="progress" aria-label="Voortgang leerpad"><div class="progress-bar"></div></div>
+
+  <header>
+    <p class="step-label">Stap 7 van 8</p>
+    <h1>De hoekfrequentie ω</h1>
+  </header>
+
+  <!-- 1. Example / predict -->
+  <section class="block">
+    <h2>Denk eerst na</h2>
+    <p>Een trilling herhaalt zich telkens na één periode T. Dat lijkt op iets wat rondgaat: een wiel, de wijzer van een klok, een draaimolen. Na één volle toer begint alles opnieuw.</p>
+    <p class="predict">Voorspel: als een punt ronddraait op een cirkel en je kijkt enkel naar hoe hoog het zit, welke grafiek krijg je dan?</p>
+  </section>
+
+  <!-- 2. Mini interaction -->
+  <section class="block">
+    <h2>Probeer het zelf</h2>
+    <div class="stage"><canvas class="mini" data-highlight="cirkel" data-a="5" data-t="4" aria-label="Een punt dat ronddraait op een cirkel, met zijn hoogte als grafiek"></canvas></div>
+    <div class="buttons">
+      <button id="play" class="primary" type="button">Pauze</button>
+    </div>
+  </section>
+
+  <!-- 3. Definition -->
+  <section class="block definition">
+    <h2>De formule in 4 kleine stappen</h2>
+    <p>De uitwijking van een trilling kan je schrijven als <b>y(t) = A · sin(2π · t / T)</b>, dit is hetzelfde als schrijven <b>y(t) = A · sin(ω · t)</b>.</p>
+    <p> <b>Geen paniek:</b> je hoeft er niet mee te rekenen. We bekijken rustig waar elk stukje vandaan komt.</p>
+  </section>
+
+  <!-- Step-by-step explanation of the formula -->
+  <section class="block">
+    <h2>1. De sinus wil een hoek</h2>
+    <p>Kijk naar de simulatie: het punt draait rond, en zijn <b>hoogte</b> tekent de grafiek. De sinus is de "rekenmachine" die bij een <b>hoek</b> zegt hoe hoog het punt zit: van −1 (onderaan) tot +1 (bovenaan).</p>
+    <p class="warning">Kort: in de sinus moet altijd een <b>hoek</b> staan.</p>
+  </section>
+
+  <section class="block">
+    <h2>2. Graden of radialen</h2>
+    <p>Een hoek meet je meestal in <b>graden</b>: één volle toer is 360°. Wiskundigen gebruiken liever een andere eenheid: de <b>radiaal</b> (rad). Het is gewoon een andere maat voor hetzelfde, zoals meter en centimeter.</p>
+    <table class="phase">
+      <tr><th>toer</th><th>graden</th><th>radialen</th></tr>
+      <tr><td>een kwart toer</td><td>90°</td><td>½π rad</td></tr>
+      <tr><td>een halve toer</td><td>180°</td><td>π rad</td></tr>
+      <tr><td>een volle toer</td><td>360°</td><td><b>2π rad</b></td></tr>
+    </table>
+    <p class="warning">Kort: <b>2π rad = 360°</b> = één volle toer = één volledige trilling.</p>
+  </section>
+
+  <section class="block">
+    <h2>3. Van tijd naar hoek: de hoekfrequentie ω</h2>
+    <p>We kennen de <b>tijd</b> t, maar de sinus wil een <b>hoek</b>. We moeten dus weten hoe snel het punt draait.</p>
+    <p>In één periode T draait het punt één volle toer, dus 2π rad. Per seconde is dat:</p>
+    <p class="formula-line"><b>ω = 2π / T</b> &nbsp; (in rad/s)</p>
+    <p>Die ω (de Griekse letter omega) heet de <b>hoekfrequentie</b>: hoeveel radialen het punt per seconde draait. Vergelijk het met een snelheid in km/h: hoeveel kilometer per uur.</p>
+    <p class="warning">Kort: <b>ω = 2π / T</b> = hoe snel de hoek groeit, in rad/s.</p>
+  </section>
+
+  <section class="block">
+    <h2>4. ω · t geeft een hoek</h2>
+    <p>Vermenigvuldig je ω met de tijd t, dan krijg je de hoek waarover het punt al gedraaid is. Kijk naar de eenheden:</p>
+    <p class="formula-line">rad/s · s = <b>rad</b></p>
+    <p>De seconden vallen weg en er blijft een hoek over. Precies wat de sinus nodig heeft. Daarom werkt de formule:</p>
+    <p class="formula-line"><b>y(t) = A · sin(ω · t)</b> &nbsp; met &nbsp; <b>ω = 2π / T</b></p>
+    <p>Een voorbeeld: T = 4 s, dus ω = 2π / 4 = ½π rad/s. Na 1 s is de hoek ½π rad = 90°, een kwart toer: het voorwerp zit in de top.</p>
+  </section>
+
+  <!-- 4. Exercises -->
+  <section class="block">
+    <h2>Oefen</h2>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">1. Wat moet er altijd in een sinus staan?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. De sinus verwacht een hoek. Daarom moeten we de tijd eerst omzetten met ω.">Een tijd</button>
+        <button type="button" data-value="b" data-feedback="Juist! De sinus zegt bij een hoek hoe hoog het punt zit.">Een hoek</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. De sinus verwacht een hoek. De afstand (de uitwijking) is wat eruit komt, na vermenigvuldigen met A.">Een afstand</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="c">
+      <p class="q">2. Hoeveel radialen is één volle toer (360°)?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. π rad is een halve toer (180°).">π rad</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. 360 is het aantal graden. In radialen is één volle toer 2π.">360 rad</button>
+        <button type="button" data-value="c" data-feedback="Juist! 2π rad = 360° = één volle toer.">2π rad</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="a">
+      <p class="q">3. Wat is de eenheid van de hoekfrequentie ω?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Juist! ω zegt hoeveel radialen het punt per seconde draait.">rad/s</button>
+        <button type="button" data-value="b" data-feedback="Niet juist. Seconden is de eenheid van de periode T.">s</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. Hz is de eenheid van de gewone frequentie f (trillingen per seconde).">Hz</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="choice" data-correct="b">
+      <p class="q">4. Waarom mag je ω · t in de sinus zetten?</p>
+      <div class="options">
+        <button type="button" data-value="a" data-feedback="Niet juist. Kijk naar de eenheden: rad/s · s = rad.">Omdat ω · t een tijd is</button>
+        <button type="button" data-value="b" data-feedback="Juist! De seconden vallen weg en er blijft een hoek over, en dat is wat de sinus nodig heeft.">Omdat rad/s · s = rad: het resultaat is een hoek</button>
+        <button type="button" data-value="c" data-feedback="Niet juist. ω is een hoek per seconde (rad/s). Pas na vermenigvuldigen met de tijd krijg je een hoek.">Omdat ω een hoek is</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question" data-type="click" data-target="min">
+      <p class="q">5. Klik op een moment waarop het punt op de cirkel driekwart toer (270° of 1,5π rad) gedraaid is.</p>
+      <canvas class="graph clickable" data-a="6" data-t="3"></canvas>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+
+    <p class="done" hidden>Stap voltooid ✓</p>
+  </section>
+
+  <!-- 5. Previous / next -->
+  <nav class="nav">
+    <a class="btn" href="stap6-frequentie.html">← Vorige: frequentie</a>
+    <a class="btn primary" href="stap8-eindcheck.html">Volgende: eindcheck →</a>
+  </nav>
+
+</div>
+</body>
+</html>
