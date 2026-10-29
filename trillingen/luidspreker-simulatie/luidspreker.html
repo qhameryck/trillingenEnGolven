@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luidspreker</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="styleLuidspreker.css">
+  <script src="scriptLuidspreker.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../trillingen.html">← Terug naar Trillingen</a>
+  <header>
+    <h1>Het membraan van een luidspreker</h1>
+    <p class="sub">De luidspreker ligt op zijn rug: het membraan trilt op en neer rond de evenwichtsstand. Zet het geluid aan en verander de periode en het volume. Wat je hoort is de echte trilling; wat je ziet is 500× vertraagd.</p>
+  </header>
+
+  <div class="formula" aria-live="polite">y(t) = A · sin(2π · t / T) &nbsp;&nbsp;  </div>
+
+  <div class="formula" aria-live="polite">y(t) = <b id="fA">3,0</b> mm · sin(2π · t / <b id="fT">4,5</b> ms) &nbsp;&nbsp; f = 1/T = <b id="fF">222</b> Hz</div>
+
+  <div class="stage"><canvas id="cv" aria-label="Animatie van een luidsprekermembraan met de bijhorende uitwijking-tijdgrafiek"></canvas></div>
+
+  <figure id="photo" class="photo" hidden>
+    <img id="photoImg" src="img/luidspreker.jpg" alt="Foto van een echte luidspreker met het membraan en de stofkap in het midden">
+    <figcaption id="photoCaption">Een echte luidspreker. Het grijze deel in de vorm van een trechter is het membraan (de conus). Het ronde dopje in het midden is de stofkap: dat punt volg je in de simulatie. Rond het membraan zit een rubberen rand die het vasthoudt en terugtrekt naar de evenwichtsstand. Hij werkt dus als de veer. Onderaan zit de magneet: die duwt het membraan op en neer. Foto: (bron)</figcaption>
+  </figure>
+
+  <div class="controls">
+    <div class="ctl">
+      <label for="sT">Periode T <output id="oT">4,5 ms</output></label>
+      <input id="sT" type="range" min="1" max="10" step="0.5" value="4.5">
+      <small>Hoe lang één volledige trilling (op en neer) duurt. Kortere periode = hogere toon.</small>
+    </div>
+    <div class="ctl">
+      <label for="sA">Amplitude A <output id="oA">3,0 mm</output></label>
+      <input id="sA" type="range" min="0.5" max="5" step="0.5" value="3">
+      <small>Hoe ver het membraan maximaal uitwijkt (de amplitude).</small>
+    </div>
+    <div class="ctl">
+      <div class="buttons">
+        <button id="play" class="primary" type="button">Pauze</button>
+        <button id="clear" type="button">Wis grafiek</button>
+        <select id="speed" aria-label="Snelheid">
+          <option value="1">Snelheid 1×</option>
+          <option value="2">Snelheid 2×</option>
+          <option value="0.5">Snelheid ½×</option>
+        </select>
+      </div>
+      <label class="check" for="help"><input id="help" type="checkbox" checked> Toon A en T</label>
+      <div class="readout"><span>t = <b id="rt">0,00</b> ms</span><span>y = <b id="rY">0,0</b> mm</span></div>
+    </div>
+  </div>
+
+
+  <div class="interactive-tools">
+    <h2>Interactieve tools</h2>
+      <div class="buttons">
+        <button id="sound" type="button">Geluid aan</button>
+        <button id="photoBtn" type="button">Toon echte luidspreker</button>
+      </div>
+  </div>
+</div>
+</body>
+</html>
